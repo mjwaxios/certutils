@@ -25,16 +25,18 @@ func main() {
 		if d == nil {
 			log.Fatal("pem decode failed")
 		}
+
 		c, err := x509.ParseCertificate(d.Bytes)
 		if err != nil {
-			fmt.Println("parse of cert failed")
-		} else {
-			fmt.Printf("Subject: %v\nIssuer : %v\n", c.Subject, c.Issuer)
+			log.Fatal("parse of cert failed")
 		}
+
+		fmt.Printf("Subject: %v\nIssuer : %v\n\n", c.Subject, c.Issuer)
+
 		if len(rest) == 0 {
 			break
 		}
-		fmt.Println()
+
 		data = rest
 	}
 }
